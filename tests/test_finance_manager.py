@@ -8,21 +8,18 @@ import sys
 import shutil
 import unittest
 
-# Ensure src/ is in sys.path
-SRC_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
+# Ensure project root and src/ are in sys.path
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+SRC_DIR = os.path.join(PROJECT_ROOT, "src")
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
 if SRC_DIR not in sys.path:
     sys.path.insert(0, SRC_DIR)
 
-try:
-    from src.expense import Expense
-    from src import utils
-    from src import reports
-    from src import file_manager
-except ImportError:
-    from expense import Expense
-    import utils
-    import reports
-    import file_manager
+from src.expense import Expense
+from src import utils
+from src import reports
+from src import file_manager
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test_temp")
 TEST_CSV = os.path.join(TEST_DATA_DIR, "test_expenses.csv")

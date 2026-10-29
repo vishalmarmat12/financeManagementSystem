@@ -8,21 +8,18 @@ Authors/Project: Complete Python Personal Finance Manager
 import os
 import sys
 
-# Ensure src/ package is in module lookup path
-SRC_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "src"))
+# Ensure project root and src/ directory are in sys.path
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SRC_DIR = os.path.join(BASE_DIR, "src")
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
 if SRC_DIR not in sys.path:
     sys.path.insert(0, SRC_DIR)
 
-try:
-    from src.expense import Expense
-    from src import file_manager
-    from src import menu
-    from src import utils
-except ImportError:
-    from expense import Expense
-    import file_manager
-    import menu
-    import utils
+from src.expense import Expense
+from src import file_manager
+from src import menu
+from src import utils
 
 # Configure UTF-8 streams on Windows to prevent UnicodeEncodeError in cp1252 consoles
 if sys.platform == "win32":
