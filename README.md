@@ -1,6 +1,17 @@
 # 💰 Python Personal Finance Manager
 
-A comprehensive, object-oriented Personal Finance Management System built with Python, featuring file persistence via CSV, data backup & restore, input validation, interactive command-line interface, and analytics with visual ASCII charts and report generation.
+A comprehensive, object-oriented Personal Finance Management System built with Python, featuring file persistence via CSV, data backup & restore, input validation, interactive command-line interface, analytics with visual ASCII charts, and complete PDF documentation.
+
+[![Documentation PDF](https://img.shields.io/badge/Documentation-PDF%20Download-blue.svg)](Documentation.pdf)
+[![Tests Passing](https://img.shields.io/badge/Unit%20Tests-11%2F11%20Passed-brightgreen.svg)](test_finance_manager.py)
+[![Python Version](https://img.shields.io/badge/Python-3.8%2B%20%7C%203.14-blue.svg)](https://www.python.org/)
+
+---
+
+## 📄 Complete Project Documentation
+- **Direct PDF Link (GitHub):** [Download / View Documentation.pdf](Documentation.pdf)
+- **Detailed Specifications:** [`docs/Personal_Finance_Manager_Documentation.pdf`](docs/Personal_Finance_Manager_Documentation.pdf)
+- Includes: Complete project description, system architecture, setup instructions, 7 visual workflow screenshots, test validation matrix, and 6-week roadmap.
 
 ---
 
@@ -16,11 +27,15 @@ Developer Arena/
 ├── reports.py                # Analytics, statistical calculations & visual charts
 ├── utils.py                  # Validation, formatting & terminal utilities
 ├── test_finance_manager.py   # Complete unit test suite (11 unit tests)
+├── Documentation.pdf         # Comprehensive Project Documentation (PDF)
 │
 ├── data/
 │   └── expenses.csv          # Persistent CSV dataset (Date, Category, Amount, Description)
 ├── backups/                  # Automatic and manual timestamped CSV backups
-└── reports/                  # Exported detailed summary reports (.txt)
+├── reports/                  # Exported detailed summary reports (.txt)
+└── docs/
+    ├── Personal_Finance_Manager_Documentation.pdf
+    └── screenshots/          # High-resolution terminal capture screenshots
 ```
 
 ---
@@ -140,3 +155,24 @@ Grand Total: ₹13,900.00 across 7 categories (9 transactions)
 - [x] **Week 4: User Interface & Features** — Menu interface, input loops, cancellation handling, table views.
 - [x] **Week 5: Advanced Features** — Category analytics, monthly aggregations, ASCII visual distribution bars, report exports.
 - [x] **Week 6: Testing & Deployment** — 100% passing unit tests, Windows UTF-8 encoding support, full documentation.
+
+---
+
+## 📸 System Screenshots & Terminal Captures
+
+| Main Menu CLI | Add Expense Validation |
+| :---: | :---: |
+| ![Main Menu](docs/screenshots/screenshot1_main_menu.png) | ![Add Expense](docs/screenshots/screenshot2_add_expense.png) |
+
+| All Expenses Ledger | Category Visual Progress Bars |
+| :---: | :---: |
+| ![View All](docs/screenshots/screenshot3_view_all.png) | ![Category Summary](docs/screenshots/screenshot4_category_summary.png) |
+
+| Monthly Analytics & Export | Backup & Safe Restore |
+| :---: | :---: |
+| ![Monthly Analytics](docs/screenshots/screenshot5_monthly_analytics.png) | ![Backup Restore](docs/screenshots/screenshot6_backup_restore.png) |
+
+| Unit Test Suite (11/11 Passed) |
+| :---: |
+| ![Unit Tests](docs/screenshots/screenshot7_unit_tests.png) |
+
