@@ -169,3 +169,4 @@ A: `main.py` automatically reconfigures standard I/O streams to UTF-8 on Windows
 
 **Q: Where are backups stored?**  
 A: Backups are stored in the `backups/` directory located at the project root.
+

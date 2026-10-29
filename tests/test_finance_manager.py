@@ -13,10 +13,16 @@ SRC_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)
 if SRC_DIR not in sys.path:
     sys.path.insert(0, SRC_DIR)
 
-from expense import Expense
-import utils
-import reports
-import file_manager
+try:
+    from src.expense import Expense
+    from src import utils
+    from src import reports
+    from src import file_manager
+except ImportError:
+    from expense import Expense
+    import utils
+    import reports
+    import file_manager
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test_temp")
 TEST_CSV = os.path.join(TEST_DATA_DIR, "test_expenses.csv")

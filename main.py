@@ -13,10 +13,16 @@ SRC_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "src"))
 if SRC_DIR not in sys.path:
     sys.path.insert(0, SRC_DIR)
 
-import file_manager
-import menu
-import utils
-from expense import Expense
+try:
+    from src.expense import Expense
+    from src import file_manager
+    from src import menu
+    from src import utils
+except ImportError:
+    from expense import Expense
+    import file_manager
+    import menu
+    import utils
 
 # Configure UTF-8 streams on Windows to prevent UnicodeEncodeError in cp1252 consoles
 if sys.platform == "win32":
