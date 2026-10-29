@@ -245,17 +245,22 @@ def build_pdf():
     
     struct_code = (
         "Developer Arena/Project First/<br/>"
-        "│── <b>main.py</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Application entry point, Windows UTF-8 bootstrap, sample seeding<br/>"
-        "│── <b>expense.py</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Expense domain model, properties, CSV row serialization<br/>"
-        "│── <b>file_manager.py</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Safe CSV read/write, automated timestamped backups, safe restore<br/>"
-        "│── <b>menu.py</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Interactive CLI menus, user input workflows, prompt abort tokens<br/>"
-        "│── <b>reports.py</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Statistical aggregations, ASCII visual progress bars, file export<br/>"
-        "│── <b>utils.py</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Input validation (Amount, Date, Category), terminal formatting<br/>"
-        "│── <b>test_finance_manager.py</b> &nbsp;&nbsp;# Complete unit test suite (11 unit tests, 100% pass rate)<br/>"
-        "│── <b>data/expenses.csv</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Active CSV dataset (Date, Category, Amount, Description)<br/>"
-        "│── <b>backups/</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Timestamped safety snapshots (expenses_backup_*.csv)<br/>"
-        "│── <b>reports/</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Exported executive summaries (.txt files)<br/>"
-        "└── <b>docs/screenshots/</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# High-resolution captured terminal workflows"
+        "│── <b>main.py</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Application entry point & orchestration loop<br/>"
+        "│── <b>requirements.txt</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Project dependencies and requirements<br/>"
+        "│── <b>Documentation.pdf</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Full technical report & documentation (PDF)<br/>"
+        "│── <b>src/</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Core source code directory<br/>"
+        "│ &nbsp;&nbsp;├── <b>__init__.py</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Package initialization<br/>"
+        "│ &nbsp;&nbsp;├── <b>expense.py</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Expense domain model & properties<br/>"
+        "│ &nbsp;&nbsp;├── <b>file_manager.py</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Safe CSV I/O, snapshot backups, safety restore<br/>"
+        "│ &nbsp;&nbsp;├── <b>menu.py</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Interactive CLI menus & cancellation flows<br/>"
+        "│ &nbsp;&nbsp;├── <b>reports.py</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Analytics, ASCII visual bars, export engine<br/>"
+        "│ &nbsp;&nbsp;└── <b>utils.py</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Input validation & cross-platform UTF-8 terminal<br/>"
+        "│── <b>tests/</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Automated unit test suite (11/11 passing tests)<br/>"
+        "│── <b>screenshots/</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Application workflow screenshots<br/>"
+        "│── <b>docs/</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Documentation PDF & User Guide<br/>"
+        "│── <b>data/expenses.csv</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Persistent CSV dataset (sample & live data)<br/>"
+        "│── <b>backups/</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Automatic and manual timestamped CSV snapshots<br/>"
+        "└── <b>reports/</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Exported executive summaries (.txt files)"
     )
     struct_table = Table([[Paragraph(struct_code, code_inline_style)]], colWidths=[540])
     struct_table.setStyle(TableStyle([
@@ -313,7 +318,7 @@ def build_pdf():
         ],
         [
             Paragraph("<b>3. Execute Test Suite:</b>", body_style),
-            Paragraph("<code>python test_finance_manager.py -v</code> &nbsp;(Runs all 11 unit test assertions)", body_style)
+            Paragraph("<code>python tests/test_finance_manager.py -v</code> &nbsp;(Runs all 11 unit test assertions)", body_style)
         ]
     ]
     setup_tbl = Table(setup_steps, colWidths=[140, 400])
@@ -440,7 +445,7 @@ def build_pdf():
     story.append(HRFlowable(width="100%", thickness=1.2, color=C_BLUE, spaceBefore=1, spaceAfter=5))
     
     test_desc = (
-        "The automated test suite in <code>test_finance_manager.py</code> exercises all critical paths, "
+        "The automated test suite in <code>tests/test_finance_manager.py</code> exercises all critical paths, "
         "validating calculations, edge cases, date validity boundaries, and persistence workflows without polluting live production data."
     )
     story.append(Paragraph(test_desc, body_style))

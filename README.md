@@ -3,7 +3,7 @@
 A comprehensive, object-oriented Personal Finance Management System built with Python, featuring file persistence via CSV, data backup & restore, input validation, interactive command-line interface, analytics with visual ASCII charts, and complete PDF documentation.
 
 [![Documentation PDF](https://img.shields.io/badge/Documentation-PDF%20Download-blue.svg)](Documentation.pdf)
-[![Tests Passing](https://img.shields.io/badge/Unit%20Tests-11%2F11%20Passed-brightgreen.svg)](test_finance_manager.py)
+[![Tests Passing](https://img.shields.io/badge/Unit%20Tests-11%2F11%20Passed-brightgreen.svg)](tests/test_finance_manager.py)
 [![Python Version](https://img.shields.io/badge/Python-3.8%2B%20%7C%203.14-blue.svg)](https://www.python.org/)
 
 ---
@@ -11,6 +11,7 @@ A comprehensive, object-oriented Personal Finance Management System built with P
 ## 📄 Complete Project Documentation
 - **Direct PDF Link (GitHub):** [Download / View Documentation.pdf](Documentation.pdf)
 - **Detailed Specifications:** [`docs/Personal_Finance_Manager_Documentation.pdf`](docs/Personal_Finance_Manager_Documentation.pdf)
+- **User Guide:** [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md)
 - Includes: Complete project description, system architecture, setup instructions, 7 visual workflow screenshots, test validation matrix, and 6-week roadmap.
 
 ---
@@ -18,48 +19,68 @@ A comprehensive, object-oriented Personal Finance Management System built with P
 ## 📁 Project Structure
 
 ```text
-Developer Arena/
+financeManagementSystem/
 │
-├── main.py                   # Main application entry point & orchestration
-├── expense.py                # Expense class definition & model logic
-├── file_manager.py           # CSV persistence, atomic backup & restore
-├── menu.py                   # Interactive CLI menu system & user workflows
-├── reports.py                # Analytics, statistical calculations & visual charts
-├── utils.py                  # Validation, formatting & terminal utilities
-├── test_finance_manager.py   # Complete unit test suite (11 unit tests)
+├── README.md                 # Project overview, setup instructions & roadmap
+├── main.py                   # Application entry point & orchestration
+├── requirements.txt          # Python dependencies
 ├── Documentation.pdf         # Comprehensive Project Documentation (PDF)
 │
-├── data/
+├── src/                      # Source code directory
+│   ├── __init__.py           # Package initialization
+│   ├── expense.py            # Expense class definition & model logic
+│   ├── file_manager.py       # CSV persistence, atomic backup & restore
+│   ├── menu.py               # Interactive CLI menu system & user workflows
+│   ├── reports.py            # Analytics, statistical calculations & visual charts
+│   └── utils.py              # Validation, formatting & terminal utilities
+│
+├── data/                     # Sample data and user data
 │   └── expenses.csv          # Persistent CSV dataset (Date, Category, Amount, Description)
+│
+├── docs/                     # Documentation and user guide
+│   ├── Documentation.pdf     # Full technical documentation (PDF)
+│   ├── Personal_Finance_Manager_Documentation.pdf
+│   └── USER_GUIDE.md         # Comprehensive end-user operation manual
+│
+├── tests/                    # Unit tests
+│   ├── __init__.py
+│   └── test_finance_manager.py # Automated test suite (11 unit tests, 100% pass rate)
+│
+├── screenshots/              # Application workflow screenshots
+│   ├── screenshot1_main_menu.png
+│   ├── screenshot2_add_expense.png
+│   ├── screenshot3_view_all.png
+│   ├── screenshot4_category_summary.png
+│   ├── screenshot5_monthly_analytics.png
+│   ├── screenshot6_backup_restore.png
+│   └── screenshot7_unit_tests.png
+│
 ├── backups/                  # Automatic and manual timestamped CSV backups
-├── reports/                  # Exported detailed summary reports (.txt)
-└── docs/
-    ├── Personal_Finance_Manager_Documentation.pdf
-    └── screenshots/          # High-resolution terminal capture screenshots
+└── reports/                  # Exported detailed summary reports (.txt)
 ```
 
 ---
 
 ## 🛠️ Key Technical Features
 
-1. **Object-Oriented Design (`expense.py`)**:
+1. **Object-Oriented Design (`src/expense.py`)**:
    - `Expense` model with `amount`, `category`, `date`, `description`, and derived properties like `month_year` and `parsed_date`.
    - Bidirectional serialization with CSV rows and dictionary conversions.
    - Formatted string representation (`__str__`): `YYYY-MM-DD | Category: ₹Amount - Description`.
 
-2. **Data Persistence & File Operations (`file_manager.py`)**:
+2. **Data Persistence & File Operations (`src/file_manager.py`)**:
    - Built-in `csv` module integration with safe header management.
    - Automatic directory bootstrap (`data/`, `backups/`, `reports/`).
    - Append-only or batch write operations.
    - **Backup & Restore System**: Generates timestamped snapshots (`expenses_backup_YYYYMMDD_HHMMSS.csv`) and allows interactive restoration with automatic pre-restore safety archiving.
 
-3. **Input Validation & Error Handling (`utils.py`)**:
+3. **Input Validation & Error Handling (`src/utils.py`)**:
    - **Amount Validation**: Ensures strictly positive floating-point values, removes currency symbols/commas, and guards against overflow.
    - **Date Validation**: Enforces strict `YYYY-MM-DD` calendar formatting (validates leap years and month boundaries) with optional quick-entry (blank = today's date).
    - **Category Validation**: Allows case-insensitive matching against standard categories or numeric selection, with support for custom category naming.
    - Cross-platform Windows UTF-8 terminal handling to prevent codepage encoding issues.
 
-4. **Analytics & Visual Reporting (`reports.py`)**:
+4. **Analytics & Visual Reporting (`src/reports.py`)**:
    - Calculations: Total expenditure, average expense, highest/lowest transactions, category shares.
    - **ASCII Visual Distribution Bars**: Terminal progress bars showing category spending percentages.
    - **Monthly Reports**: Chronological breakdown by `YYYY-MM` with percentage contribution.
@@ -68,10 +89,20 @@ Developer Arena/
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Getting Started & Setup Instructions
 
 ### Prerequisites
-- Python 3.8+ (tested and verified with Python 3.14)
+- Python 3.8+ (tested and verified with Python 3.8, 3.10, 3.12, and 3.14)
+
+### Installation
+```bash
+# Clone the repository
+git clone https://github.com/vishalmarmat12/financeManagementSystem.git
+cd financeManagementSystem
+
+# (Optional) Install documentation dependencies
+pip install -r requirements.txt
+```
 
 ### Running the Application
 ```bash
@@ -80,7 +111,11 @@ python main.py
 
 ### Running the Test Suite
 ```bash
-python test_finance_manager.py
+# Run unit test suite directly
+python tests/test_finance_manager.py -v
+
+# Or use Python unittest auto-discovery
+python -m unittest discover tests
 ```
 
 ---
@@ -162,17 +197,17 @@ Grand Total: ₹13,900.00 across 7 categories (9 transactions)
 
 | Main Menu CLI | Add Expense Validation |
 | :---: | :---: |
-| ![Main Menu](docs/screenshots/screenshot1_main_menu.png) | ![Add Expense](docs/screenshots/screenshot2_add_expense.png) |
+| ![Main Menu](screenshots/screenshot1_main_menu.png) | ![Add Expense](screenshots/screenshot2_add_expense.png) |
 
 | All Expenses Ledger | Category Visual Progress Bars |
 | :---: | :---: |
-| ![View All](docs/screenshots/screenshot3_view_all.png) | ![Category Summary](docs/screenshots/screenshot4_category_summary.png) |
+| ![View All](screenshots/screenshot3_view_all.png) | ![Category Summary](screenshots/screenshot4_category_summary.png) |
 
 | Monthly Analytics & Export | Backup & Safe Restore |
 | :---: | :---: |
-| ![Monthly Analytics](docs/screenshots/screenshot5_monthly_analytics.png) | ![Backup Restore](docs/screenshots/screenshot6_backup_restore.png) |
+| ![Monthly Analytics](screenshots/screenshot5_monthly_analytics.png) | ![Backup Restore](screenshots/screenshot6_backup_restore.png) |
 
 | Unit Test Suite (11/11 Passed) |
 | :---: |
-| ![Unit Tests](docs/screenshots/screenshot7_unit_tests.png) |
+| ![Unit Tests](screenshots/screenshot7_unit_tests.png) |
 

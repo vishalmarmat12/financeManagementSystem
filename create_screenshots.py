@@ -6,8 +6,10 @@ Saves high-resolution PNG images into docs/screenshots/
 import os
 from PIL import Image, ImageDraw, ImageFont
 
-OUTPUT_DIR = r"c:\xampp\htdocs\Developer Arena\Project First\docs\screenshots"
+OUTPUT_DIR = r"c:\xampp\htdocs\Developer Arena\Project First\screenshots"
+DOCS_SCREENSHOTS_DIR = r"c:\xampp\htdocs\Developer Arena\Project First\docs\screenshots"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+os.makedirs(DOCS_SCREENSHOTS_DIR, exist_ok=True)
 
 FONT_PATH = r"C:\Windows\Fonts\consola.ttf"
 TITLE_FONT_PATH = r"C:\Windows\Fonts\segoeui.ttf"
@@ -67,6 +69,8 @@ def render_terminal(title: str, lines: list, output_filename: str, width=1050):
         
     out_path = os.path.join(OUTPUT_DIR, output_filename)
     img.save(out_path, quality=95)
+    docs_copy = os.path.join(DOCS_SCREENSHOTS_DIR, output_filename)
+    img.save(docs_copy, quality=95)
     print(f"Generated: {output_filename}")
     return out_path
 
@@ -238,3 +242,4 @@ lines_tests = [
 render_terminal("PowerShell — Automated Unit Test Suite (11/11 Passing)", lines_tests, "screenshot7_unit_tests.png", width=1050)
 
 print("All screenshots generated successfully!")
+

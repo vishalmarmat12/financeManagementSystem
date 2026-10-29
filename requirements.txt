@@ -1,0 +1,6 @@
+# Personal Finance Management System
+# Core application runs on Python Standard Library (Python 3.8+)
+# The packages below are utilized for documentation rendering, testing, and visual generation:
+
+reportlab>=4.0.0
+pillow>=9.0.0

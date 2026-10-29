@@ -10,7 +10,9 @@ from typing import List, Dict, Any, Optional
 from expense import Expense
 from utils import format_currency, create_ascii_bar, truncate_text
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Default paths: project root is the parent directory of src/
+SRC_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(SRC_DIR)
 REPORTS_DIR = os.path.join(BASE_DIR, "reports")
 
 

@@ -4,8 +4,15 @@ Validates all core functionality and edge cases.
 """
 
 import os
+import sys
 import shutil
 import unittest
+
+# Ensure src/ is in sys.path
+SRC_DIR = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
+
 from expense import Expense
 import utils
 import reports
@@ -170,7 +177,7 @@ class TestFileManagerOperations(unittest.TestCase):
         self.assertEqual(file_manager.load_expenses(TEST_CSV)[0].amount, 999.0)
 
         # Restore from backup
-        restore_res, _ = file_manager.restore_backup(backup_path, TEST_CSV)
+        restore_res, _ = file_manager.restore_backup(backup_path, TEST_CSV, TEST_BACKUP_DIR)
         self.assertTrue(restore_res)
         restored_data = file_manager.load_expenses(TEST_CSV)
         self.assertEqual(len(restored_data), 1)

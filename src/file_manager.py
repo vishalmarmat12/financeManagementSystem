@@ -11,8 +11,9 @@ from datetime import datetime
 from typing import List, Tuple, Optional
 from expense import Expense
 
-# Default paths
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Default paths: project root is the parent directory of src/
+SRC_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(SRC_DIR)
 DATA_DIR = os.path.join(BASE_DIR, "data")
 DEFAULT_DATA_FILE = os.path.join(DATA_DIR, "expenses.csv")
 BACKUP_DIR = os.path.join(BASE_DIR, "backups")
@@ -118,6 +119,11 @@ def create_backup(source_file: str = DEFAULT_DATA_FILE, target_dir: str = BACKUP
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     backup_filename = f"expenses_backup_{timestamp}.csv"
     destination = os.path.join(target_dir, backup_filename)
+    counter = 1
+    while os.path.exists(destination):
+        backup_filename = f"expenses_backup_{timestamp}_{counter}.csv"
+        destination = os.path.join(target_dir, backup_filename)
+        counter += 1
 
     try:
         shutil.copy2(source_file, destination)
@@ -150,7 +156,11 @@ def list_backups(backup_dir: str = BACKUP_DIR) -> List[Tuple[str, str, int, str]
     return backups
 
 
-def restore_backup(backup_filepath: str, target_file: str = DEFAULT_DATA_FILE) -> Tuple[bool, str]:
+def restore_backup(
+    backup_filepath: str,
+    target_file: str = DEFAULT_DATA_FILE,
+    safety_backup_dir: Optional[str] = None
+) -> Tuple[bool, str]:
     """
     Restores data from a selected backup file to the main expenses CSV.
     Automatically creates a safety backup of current data before overwriting.
@@ -165,7 +175,14 @@ def restore_backup(backup_filepath: str, target_file: str = DEFAULT_DATA_FILE) -
     try:
         # Pre-restore safety backup
         if os.path.exists(target_file):
-            create_backup(target_file, BACKUP_DIR)
+            s_dir = safety_backup_dir or BACKUP_DIR
+            ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+            pr_dest = os.path.join(s_dir, f"expenses_backup_prerestore_{ts}.csv")
+            c = 1
+            while os.path.exists(pr_dest):
+                pr_dest = os.path.join(s_dir, f"expenses_backup_prerestore_{ts}_{c}.csv")
+                c += 1
+            shutil.copy2(target_file, pr_dest)
 
         shutil.copy2(backup_filepath, target_file)
         return True, "Backup restored successfully."
